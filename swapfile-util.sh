@@ -2,36 +2,36 @@
 
 # Common functions
 print_separator() {
-	echo -e "\033[36m-\033[94m===========================\033[36m-\033[39m"
+    echo -e "\033[36m-\033[94m===========================\033[36m-\033[39m"
 }
 
 print_header() {
-	echo -e "          \033[36m_   \033[94m__  \033[36m_\033[39m"
-	echo -e "     \033[96m_  \033[36m_// \033[94m/\\\\\\ \\ \033[36m\\\\\\_  \033[96m_ \033[39m"
-	echo -e "   \033[96m_// \033[36m/ / \033[94m/ /_\\ \\ \033[36m\\ \\ \033[96m\\\\\\_ \033[39m"
-	echo -e "  \033[96m/ / \033[36m/ / \033[94m/ ___\\\\\\ \\ \033[36m\\ \\ \033[96m\\ \\\ \033[39m"
-	echo -e " \033[96m/_/ \033[36m/_/ \033[94m/_/     \033[94m\\_\\ \033[36m\\_\\ \033[96m\\_\\\ \033[39m"
-	print_separator
-	echo -e "\033[36m        NibblePoker's  \033[39m"
-	echo -e "\033[36m      Swapfile Utility \033[39m"
-	print_separator
+    echo -e "          \033[36m_   \033[94m__  \033[36m_\033[39m"
+    echo -e "     \033[96m_  \033[36m_// \033[94m/\\\\\\ \\ \033[36m\\\\\\_  \033[96m_ \033[39m"
+    echo -e "   \033[96m_// \033[36m/ / \033[94m/ /_\\ \\ \033[36m\\ \\ \033[96m\\\\\\_ \033[39m"
+    echo -e "  \033[96m/ / \033[36m/ / \033[94m/ ___\\\\\\ \\ \033[36m\\ \\ \033[96m\\ \\\ \033[39m"
+    echo -e " \033[96m/_/ \033[36m/_/ \033[94m/_/     \033[94m\\_\\ \033[36m\\_\\ \033[96m\\_\\\ \033[39m"
+    print_separator
+    echo -e "\033[36m        NibblePoker's  \033[39m"
+    echo -e "\033[36m      Swapfile Utility \033[39m"
+    print_separator
 }
 
 print_footer() {
-	print_separator
-	echo -e " \033[96m\\_\\ \033[36m\\_\\             \033[36m/_/ \033[96m/_/\033[39m"
+    print_separator
+    echo -e " \033[96m\\_\\ \033[36m\\_\\             \033[36m/_/ \033[96m/_/\033[39m"
 }
 
 function prompt_yes_no {
-	local message=$1
-	while true; do
-		read -p "$message" answer
-		case $answer in
-			[Yy]* ) return 0;;
-			[Nn]* ) return 1;;
-			* ) echo "Please enter yes or no.";;
-		esac
-	done
+    local message=$1
+    while true; do
+        read -p "$message" answer
+        case $answer in
+            [Yy]* ) return 0;;
+            [Nn]* ) return 1;;
+            * ) echo "Please enter yes or no.";;
+        esac
+    done
 }
 
 
@@ -91,25 +91,25 @@ swapfileLocation=${swapfileLocation:-/swapfile}
 echo -e "> Using '\033[96m$swapfileLocation\033[39m'"
 
 if [[ ! $swapfileLocation == /* ]]; then
-	echo "The given path is not absolute !"
-	exit 1
+    echo "The given path is not absolute !"
+    exit 1
 fi
 
 
 # > Checking if the file already exist
 if [ -f "$swapfileLocation" ]; then
-	echo "> The swapfile already exist !"
-	
-	if prompt_yes_no "Do you want to delete it ? [Y/N]"; then
-		# TODO: Remove it
-		echo "TODO"
-		exit 0
-	else
-		echo "> No action needs to be taken"
-	fi
-	
-	print_footer
-	exit 0
+    echo "> The swapfile already exist !"
+    
+    if prompt_yes_no "Do you want to delete it ? [Y/N]"; then
+        # TODO: Remove it
+        echo "TODO"
+        exit 0
+    else
+        echo "> No action needs to be taken"
+    fi
+    
+    print_footer
+    exit 0
 fi
 
 
@@ -168,11 +168,11 @@ echo -e "> Available space on '\033[96m$swapfileDevice\033[39m':"
 echo -e "> '\033[96m$availableSpaceHuman\033[39m' <-> '\033[96m$availableSpace\033[39m' bytes"
 
 if (( $availableSpace > $swapfileByteSize )); then
-	echo -e "> We have enough space :)"
+    echo -e "> We have enough space :)"
 else
-	echo -e "> \033[31mNot enough space available to create the swapfile !\033[39m"
-	print_footer
-	exit 20
+    echo -e "> \033[31mNot enough space available to create the swapfile !\033[39m"
+    print_footer
+    exit 20
 fi
 
 
@@ -185,12 +185,12 @@ echo -e "$ \033[32mmkswap $swapfileLocation\033[39m"
 echo -e "$ \033[32mswapon $swapfileLocation\033[39m"
 
 if prompt_yes_no "Does is all look good to you ? [Y/N]"; then
-	echo "> Alrighty, starting the process..."
+    echo "> Alrighty, starting the process..."
 else
-	echo "> No further action will to be taken !"
-	echo "> Please report any issue to the project's repository."
-	print_footer
-	exit 0
+    echo "> No further action will to be taken !"
+    echo "> Please report any issue to the project's repository."
+    print_footer
+    exit 0
 fi
 
 
@@ -217,10 +217,10 @@ echo -e "The following command will be used if you desire to:"
 echo -e "$ \033[32mecho \"$swapfileLocation swap swap defaults 0 0\" >> /etc/fstab\033[39m"
 
 if prompt_yes_no "Does is all look good to you ? [Y/N]"; then
-	echo "> Alrighty, starting the process..."
-	echo "$swapfileLocation swap swap defaults 0 0" >> /etc/fstab
+    echo "> Alrighty, starting the process..."
+    echo "$swapfileLocation swap swap defaults 0 0" >> /etc/fstab
 else
-	echo "> No further action will to be taken !"
+    echo "> No further action will to be taken !"
 fi
 
 

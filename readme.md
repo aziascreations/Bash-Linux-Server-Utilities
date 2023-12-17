@@ -1,5 +1,5 @@
 # Linux Server Utility Scripts
-**This is still a W.I.P !**
+A set of small interactive scripts that can help you setup swapfiles and other things on your linux servers.
 
 
 ## Scripts
@@ -14,7 +14,21 @@ All the size conversions and checks for available space are done automatically.
 <img src="previews/swapfile-util.gif">
 </details
 
-**See:** [swapfile-util.sh](swapfile-util.sh)
+**File:** [swapfile-util.sh](swapfile-util.sh)
+
+
+## Usage
+1. Clone the repository
+```shell
+git clone https://github.com/aziascreations/Bash-Linux-Server-Utilities.git
+```
+
+2. Setup the permissions
+```shell
+chmod +x Bash-Linux-Server-Utilities/*.sh
+```
+
+3. Run the desired script
 
 
 ## Licenses
